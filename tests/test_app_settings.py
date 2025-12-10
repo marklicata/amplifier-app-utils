@@ -167,9 +167,11 @@ def test_apply_provider_overrides_to_profile(mock_sources, app_settings, mock_co
     
     mock_sources.get.return_value = "git+https://example.com/provider-test"
     
-    # Create base profile with one provider
+    # Create base profile with one provider - include required fields
     profile = Profile(
         name="test-profile",
+        profile={},  # Required field
+        session={},  # Required field
         providers=[
             ModuleConfig(module="provider-test", config={"model": "base-model"})
         ]
@@ -195,9 +197,11 @@ def test_apply_provider_overrides_adds_new_provider(mock_sources, app_settings, 
     
     mock_sources.get.return_value = "git+https://example.com/provider-new"
     
-    # Create base profile with one provider
+    # Create base profile with one provider - include required fields
     profile = Profile(
         name="test-profile",
+        profile={},  # Required field
+        session={},  # Required field
         providers=[
             ModuleConfig(module="provider-existing", config={"model": "existing"})
         ]
@@ -221,8 +225,11 @@ def test_apply_provider_overrides_no_overrides(app_settings):
     """Test applying overrides when there are none."""
     from amplifier_profiles.schema import Profile, ModuleConfig
     
+    # Create profile with required fields
     profile = Profile(
         name="test-profile",
+        profile={},  # Required field
+        session={},  # Required field
         providers=[
             ModuleConfig(module="provider-test", config={"model": "base-model"})
         ]
