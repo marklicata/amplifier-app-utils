@@ -1,0 +1,45 @@
+[project]
+name = "amplifier-foundation"
+version = "0.1.0"
+description = "Common foundation library for building Amplifier applications"
+license = "MIT"
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [{ name = "Microsoft MADE:Explorations Team" }]
+dependencies = [
+    "pydantic>=2.0.0",
+    "amplifier-core",
+    "amplifier-config",
+    "amplifier-collections",
+    "amplifier-module-resolution",
+    "amplifier-profiles",
+    "pyyaml>=6.0.3",
+]
+
+[tool.uv]
+package = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["amplifier_foundation"]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = ["pytest>=8.4.2", "pytest-asyncio>=0.24.0"]
+
+[tool.uv.sources]
+amplifier-core = { git = "https://github.com/microsoft/amplifier-core", branch = "main" }
+amplifier-config = { git = "https://github.com/microsoft/amplifier-config", branch = "main" }
+amplifier-module-resolution = { git = "https://github.com/microsoft/amplifier-module-resolution", branch = "main" }
+amplifier-collections = { git = "https://github.com/microsoft/amplifier-collections", branch = "main" }
+amplifier-profiles = { git = "https://github.com/microsoft/amplifier-profiles", branch = "main" }
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib"
+asyncio_mode = "strict"
